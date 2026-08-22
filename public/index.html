@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja Virtual</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">LOJA VIRTUAL</div>
+  <button id="cartBtn">Carrinho (<span id="count">0</span>)</button>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Produtos em destaque</h1>
+    <p>Ganhe <strong>10% de desconto</strong> pagando via Pix.</p>
+  </section>
+
+  <section id="products" class="grid"></section>
+</main>
+
+<aside id="cart" class="cart">
+  <button id="closeCart" class="close">×</button>
+  <h2>Seu carrinho</h2>
+  <div id="cartItems"></div>
+
+  <div class="summary">
+    <div>Subtotal: <span id="subtotal">R$ 0,00</span></div>
+    <div id="discountRow" hidden>
+      Desconto Pix: <span id="discount">R$ 0,00</span>
+    </div>
+    <strong>Total: <span id="total">R$ 0,00</span></strong>
+  </div>
+
+  <button id="checkoutBtn" class="primary">
+    Finalizar compra
+  </button>
+</aside>
+
+<div id="checkout" class="modal">
+  <div class="modalBox">
+    <button id="closeCheckout" class="close">×</button>
+
+    <h2>Entrega e pagamento</h2>
+
+    <form id="checkoutForm">
+      <input name="name" placeholder="Nome completo" required>
+      <input name="phone" placeholder="Telefone" required>
+      <input name="zip" placeholder="CEP" required>
+      <input name="street" placeholder="Rua e número" required>
+      <input name="city" placeholder="Cidade" required>
+      <input
