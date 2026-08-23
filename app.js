@@ -1,8 +1,9 @@
-const produtos = [
-  { id: 1, nome: "Produto A", preco: 29.90 },
-  { id: 2, nome: "Produto B", preco: 49.90 },
-  { id: 3, nome: "Produto C", preco: 89.90 }
+const products = [
+  { id: 1, name: "Camiseta Preta", price: 59.90 },
+  { id: 2, name: "Boné Mousse", price: 35.00 },
+  { id: 3, name: "Fone Bluetooth", price: 120.00 }
 ];
+
 
 let carrinho = [];
 
