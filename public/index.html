@@ -1,55 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loja Virtual</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f9; color: #333; }
+        header { background: #111; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .banner { text-align: center; margin-bottom: 25px; }
+        .produto-card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .produto-info h3 { margin: 0 0 5px 0; }
+        .produto-info p { margin: 0; color: #666; font-weight: bold; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        button:hover { background-color: #0056b3; }
+        #carrinho-contador { background: white; color: black; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="brand">LOJA VIRTUAL</div>
-  <button id="cartBtn">Carrinho (<span id="count">0</span>)</button>
-</header>
+    <header>
+        <h2>LOJA VIRTUAL</h2>
+        <div id="carrinho-info">Carrinho (<span id="carrinho-contador">0</span>)</div>
+    </header>
 
-<main>
-  <section class="hero">
-    <h1>Produtos em destaque</h1>
-    <p>Ganhe <strong>10% de desconto</strong> pagando via Pix.</p>
-  </section>
+    <div class="container">
+        <div class="banner">
+            <h1>Produtos em destaque</h1>
+            <p>Ganhe <strong>10% de desconto</strong> pagando via Pix.</p>
+        </div>
 
-  <section id="products" class="grid"></section>
-</main>
-
-<aside id="cart" class="cart">
-  <button id="closeCart" class="close">×</button>
-  <h2>Seu carrinho</h2>
-  <div id="cartItems"></div>
-
-  <div class="summary">
-    <div>Subtotal: <span id="subtotal">R$ 0,00</span></div>
-    <div id="discountRow" hidden>
-      Desconto Pix: <span id="discount">R$ 0,00</span>
+        <div id="lista-produtos">
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Camiseta Preta</h3>
+                    <p>R$ 59,90</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(1)">Adicionar</button>
+            </div>
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Boné Mousse</h3>
+                    <p>R$ 35,00</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(2)">Adicionar</button>
+            </div>
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Fone Bluetooth</h3>
+                    <p>R$ 120,00</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(3)">Adicionar</button>
+            </div>
+        </div>
     </div>
-    <strong>Total: <span id="total">R$ 0,00</span></strong>
-  </div>
 
-  <button id="checkoutBtn" class="primary">
-    Finalizar compra
-  </button>
-</aside>
-
-<div id="checkout" class="modal">
-  <div class="modalBox">
-    <button id="closeCheckout" class="close">×</button>
-
-    <h2>Entrega e pagamento</h2>
-
-    <form id="checkoutForm">
-      <input name="name" placeholder="Nome completo" required>
-      <input name="phone" placeholder="Telefone" required>
-      <input name="zip" placeholder="CEP" required>
-      <input name="street" placeholder="Rua e número" required>
-      <input name="city" placeholder="Cidade" required>
-      <input
+    <script src="../app.js"></script>
+</body>
+</html>
