@@ -33,7 +33,27 @@
         </div>
 
         <div id="lista-produtos">
-            <!-- Os produtos serão carregados automaticamente do servidor aqui -->
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Produto Exemplo A</h3>
+                    <p>R$ 39,90</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(1)">Adicionar</button>
+            </div>
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Produto Exemplo B</h3>
+                    <p>R$ 59,90</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(2)">Adicionar</button>
+            </div>
+            <div class="produto-card">
+                <div class="produto-info">
+                    <h3>Produto Exemplo C</h3>
+                    <p>R$ 89,90</p>
+                </div>
+                <button onclick="adicionarAoCarrinho(3)">Adicionar</button>
+            </div>
         </div>
 
         <button class="btn-pagar" onclick="finalizarPedido()">Finalizar Pedido / Pagar</button>
