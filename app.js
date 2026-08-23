@@ -1,60 +1,58 @@
-const products = [
-  { id: 1, name: "Produto A", price: 49.90 },
-  { id: 2, name: "Produto B", price: 79.90 },
-  { id: 3, name: "Produto C", price: 99.90 }
+const produtos = [
+  { id: 1, nome: "Produto A", preco: 29.90 },
+  { id: 2, nome: "Produto B", preco: 49.90 },
+  { id: 3, nome: "Produto C", preco: 89.90 }
 ];
 
-let cart = [];
+let carrinho = [];
 
-const $ = (id) => document.getElementById(id);
+function adicionarAoCarrinho(id) {
+  const produto = produtos.find(p => p.id === id);
+  if (!produto) return;
 
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  if (!product) return;
-
-  const item = cart.find(p => p.id === id);
-
+  const item = carrinho.find(item => item.id === id);
   if (item) {
-    item.quantity++;
+    item.quantidade++;
   } else {
-    cart.push({ ...product, quantity: 1 });
+    carrinho.push({ ...produto, quantidade: 1 });
   }
-
-  renderCart();
-  openCart();
+  
+  renderCarrinho();
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(p => p.id !== id);
-  renderCart();
+function renderCarrinho() {
+  console.log("Carrinho atualizado:", carrinho);
 }
 
-function changeQuantity(id, amount) {
-  const item = cart.find(p => p.id === id);
-  if (!item) return;
-
-  item.quantity += amount;
-
-  if (item.quantity <= 0) {
-    removeFromCart(id);
+async function pagarComPicPay() {
+  const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+  
+  if (total === 0) {
+    alert("Seu carrinho está vazio!");
     return;
   }
 
-  renderCart();
+  try {
+    const response = await fetch('/api/criar-pix-picpay', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        valor: total,
+        comprador: {
+          nome: "Cliente",
+          email: "cliente@email.com"
+        }
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.paymentUrl) {
+      window.location.href = data.paymentUrl;
+    } else {
+      alert("Erro ao gerar o pagamento. Tente novamente.");
+    }
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+  }
 }
-
-function getTotal() {
-  return cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-}
-
-function renderCart() {
-  const container = $("cartItems");
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (
