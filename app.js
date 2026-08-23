@@ -1,33 +1,13 @@
-let produtosDoServidor = [];
+const produtos = [
+    { id: 1, name: "Produto Exemplo A", price: 39.90 },
+    { id: 2, name: "Produto Exemplo B", price: 59.90 },
+    { id: 3, name: "Produto Exemplo C", price: 89.90 }
+];
+
 let carrinho = [];
 
-// Busca os produtos direto da API do server.js ao carregar a página
-async function carregarProdutos() {
-    try {
-        const response = await fetch('/api/products');
-        produtosDoServidor = await response.json();
-        
-        const container = document.getElementById('lista-produtos');
-        container.innerHTML = '';
-
-        produtosDoServidor.forEach(produto => {
-            container.innerHTML += `
-                <div class="produto-card">
-                    <div class="produto-info">
-                        <h3>${produto.name}</h3>
-                        <p>R$ ${produto.price.toFixed(2).replace('.', ',')}</p>
-                    </div>
-                    <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar</button>
-                </div>
-            `;
-        });
-    } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-    }
-}
-
 function adicionarAoCarrinho(id) {
-    const produto = produtosDoServidor.find(p => p.id === id);
+    const produto = produtos.find(p => p.id === id);
     if (!produto) return;
 
     const item = carrinho.find(i => i.id === id);
@@ -52,14 +32,13 @@ async function finalizarPedido() {
         return;
     }
 
-    // Dados de exemplo do cliente para teste (você pode criar inputs depois se quiser)
     const pedidoData = {
         items: carrinho,
         customer: {
             name: "Cliente Teste",
             address: "Rua Exemplo, 123"
         },
-        paymentMethod: "pix" // Aplica os 10% de desconto do seu server.js
+        paymentMethod: "pix"
     };
 
     try {
@@ -83,7 +62,3 @@ async function finalizarPedido() {
         alert("Erro ao conectar com o servidor.");
     }
 }
-
-// Executa ao carregar a página
-window.onload = carregarProdutos;
-    
