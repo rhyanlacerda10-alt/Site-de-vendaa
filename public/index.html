@@ -14,7 +14,11 @@
         .produto-info p { margin: 0; color: #666; font-weight: bold; }
         button { background-color: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px; }
         button:hover { background-color: #0056b3; }
-        .btn-pagar { background-color: #28a745; font-size: 16px; width: 100%; padding: 15px; margin-top: 20px; border-radius: 8px; }
+        .pagamento-box { background: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pagamento-box h3 { margin-top: 0; margin-bottom: 10px; font-size: 16px; }
+        .pagamento-opcoes { display: flex; gap: 15px; margin-bottom: 15px; }
+        .pagamento-opcoes label { cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 5px; }
+        .btn-pagar { background-color: #28a745; font-size: 16px; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; }
         .btn-pagar:hover { background-color: #218838; }
         #carrinho-contador { background: white; color: black; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
     </style>
@@ -56,7 +60,15 @@
             </div>
         </div>
 
-        <button class="btn-pagar" onclick="finalizarPedido()">Finalizar Pedido / Pagar</button>
+        <div class="pagamento-box">
+            <h3>Escolha a forma de pagamento:</h3>
+            <div class="pagamento-opcoes">
+                <label><input type="radio" name="pagamento" value="pix" checked> Pix (10% OFF)</label>
+                <label><input type="radio" name="pagamento" value="credito"> Crédito</label>
+                <label><input type="radio" name="pagamento" value="debito"> Débito</label>
+            </div>
+            <button class="btn-pagar" onclick="finalizarPedido()">Finalizar Pedido / Pagar</button>
+        </div>
     </div>
 
     <script>
@@ -94,13 +106,16 @@
                 return;
             }
 
+            // Pega a forma de pagamento selecionada na tela
+            const metodoSelecionado = document.querySelector('input[name="pagamento"]:checked').value;
+
             const pedidoData = {
                 items: carrinho,
                 customer: {
-                    name: "Cliente Teste",
-                    address: "Rua Exemplo, 123"
+                    name: "Cliente da Loja",
+                    address: "Endereço do Cliente"
                 },
-                paymentMethod: "pix"
+                paymentMethod: metodoSelecionado
             };
 
             try {
@@ -113,7 +128,7 @@
                 const resultado = await response.json();
 
                 if (response.ok) {
-                    alert(`Pedido ${resultado.id} criado com sucesso! Total com desconto Pix: R$ ${resultado.total.toFixed(2).replace('.', ',')}`);
+                    alert(`Pedido ${resultado.id} realizado com sucesso via ${metodoSelecionado.toUpperCase()}!\nTotal: R$ ${resultado.total.toFixed(2).replace('.', ',')}`);
                     carrinho = [];
                     atualizarContador();
                 } else {
@@ -127,4 +142,4 @@
     </script>
 </body>
     </html>
-    
+        
