@@ -34,12 +34,7 @@ function pagarComPicPay() {
         return;
     }
     
-    // Calcula o valor total
     let total = carrinho.reduce((sum, item) => sum + (item.price * item.quantidade), 0);
-    
-    // Aqui você pode colocar o seu link de pagamento ou redirecionar
     alert(`Redirecionando para o pagamento de R$ ${total.toFixed(2)}...`);
-    
-    // Exemplo de link de pagamento (substitua pelo seu link real do PicPay/Mercado Pago se quiser)
     window.location.href = "https://picpay.me/seu-usuario"; 
-      }
+}
