@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja Automática</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
+        .produto { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        button { background-color: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        button:hover { background-color: #0056b3; }
+        .btn-pagar { background-color: #28a745; font-size: 16px; padding: 10px 20px; margin-top: 15px; }
+        .btn-pagar:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <h1>Minha Loja Automática</h1>
+    <p>Escolha seus produtos abaixo:</p>
+
+    <div class="produto">
+        <h3>Camiseta Preta</h3>
+        <p>R$ 59,90</p>
+        <button onclick="adicionarAoCarrinho(1)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <h3>Boné Mousse</h3>
+        <p>R$ 35,00</p>
+        <button onclick="adicionarAoCarrinho(2)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+        <h3>Fone Bluetooth</h3>
+        <p>R$ 120,00</p>
+        <button onclick="adicionarAoCarrinho(3)">Adicionar ao Carrinho</button>
+    </div>
+
+    <hr>
+
+    <h2>Finalizar Pedido</h2>
+    <button class="btn-pagar" onclick="pagarComPicPay()">Pagar com PicPay</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
